@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Undangan Digital A&A - Final Presisi</title>
+    <title>Undangan Digital A&A - Akurasi Final</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html {
             width: 100%;
             height: 100%;
-            /* Supaya bisa di-refreshing (tarik bawah), overflow-y harus auto */
-            overflow-y: auto;
+            overflow-y: auto; /* Tetap bisa refresh */
             overflow-x: hidden;
             background-color: #f0f0f0;
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Container tetap 100vh agar tata letak tidak berantakan saat di-scroll */
         .master-container {
             position: relative;
             width: 100%;
@@ -26,7 +24,7 @@
             background-image: url('wallpaper.png');
             background-size: cover;
             background-position: center;
-            overflow: hidden; /* Elemen di dalam tetap terkunci posisinya */
+            overflow: hidden;
         }
 
         .dekor {
@@ -35,44 +33,43 @@
             object-fit: contain;
         }
 
-        /* Foto 12: BINGKAI (Tetap di Atas) */
-        .foto-12-bingkai {
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 100%; height: 100%;
-            object-position: top;
-            z-index: 10;
+        /* --- PERBAIKAN KHUSUS NOMOR 2, 8 (KE ATAS) --- */
+        .foto-2-pink { top: 20% !important; right: -2%; width: 35%; z-index: 20; }
+        .foto-8-pink { top: 20% !important; left: -2%; width: 35%; z-index: 20; }
+
+        /* --- PERBAIKAN KHUSUS NOMOR 3, 7 (DIKECILIN & KE BAWAH) --- */
+        .foto-3-hijau { bottom: 18% !important; right: 2%; width: 30% !important; z-index: 25; }
+        .foto-7-hijau { bottom: 18% !important; left: 2%; width: 30% !important; z-index: 25; }
+
+        /* --- BURUNG DIGEDEIN (NOMOR 13) --- */
+        .foto-13-burung { top: 12%; left: 15%; width: 100px !important; z-index: 15; }
+
+        /* --- TOMBOL SATU BARIS --- */
+        .btn-buka {
+            background-color: #96693d;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap; /* MAKSA SATU BARIS */
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
-        /* Foto 14: RUMAH ADAT */
-        .foto-14-rumah {
-            bottom: 12%; left: 50%;
-            transform: translateX(-50%);
-            width: 90%; height: auto;
-            z-index: 5;
-        }
-
-        /* AREA TENGAH (Foto 2 & 8 dinaikkan sedikit sesuai request Bebep) */
-        .foto-2-pink { top: 30%; right: -2%; width: 35%; z-index: 20; } /* Naik dari 35% ke 30% */
-        .foto-8-pink { top: 30%; left: -2%; width: 35%; z-index: 20; } /* Naik dari 35% ke 30% */
-
-        /* AREA ATAS */
+        /* --- ELEMEN LAIN (TIDAK BERUBAH) --- */
+        .foto-12-bingkai { top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; object-position: top; z-index: 10; }
+        .foto-14-rumah { bottom: 12%; left: 50%; transform: translateX(-50%); width: 90%; z-index: 5; }
         .foto-1-biru { top: 0; right: 0; width: 40%; z-index: 30; }
         .foto-9-biru { top: 0; left: 0; width: 40%; z-index: 30; }
-        .foto-13-burung { top: 12%; left: 20%; width: 60px; z-index: 15; }
-
-        /* AREA TENGAH BAWAH (Foto 3 & 7) */
-        .foto-3-hijau { bottom: 15%; right: 0; width: 45%; z-index: 25; }
-        .foto-7-hijau { bottom: 15%; left: 0; width: 45%; z-index: 25; }
-
-        /* AREA DASAR (Lantai - Foto 4, 5, 6, 10 agar tidak kepotong) */
-        /* Kita pakai bottom: 0 dan pastikan width-nya pas */
         .foto-4-biru { bottom: 0; right: 0; width: 40%; z-index: 50; }
         .foto-5-biru { bottom: 0; left: 0; width: 40%; z-index: 50; }
         .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75%; z-index: 55; }
         .foto-10-pink-red { bottom: 5px; left: 50%; transform: translateX(-50%); width: 85%; z-index: 45; }
-
-        /* LOGO & TOMBOL */
+        
         .main-content {
             position: absolute;
             top: 48%; left: 50%;
@@ -82,21 +79,7 @@
             align-items: center;
             z-index: 100;
         }
-
-        .foto-11-logo { width: 180px; margin-bottom: 20px; }
-        
-        .btn-buka {
-            background-color: #96693d;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
+        .foto-11-logo { width: 180px; margin-bottom: 25px; }
     </style>
 </head>
 <body>
@@ -106,11 +89,10 @@
         <img src="foto_14.png" class="dekor foto-14-rumah">
         <img src="foto_13.gif" class="dekor foto-13-burung">
 
-        <img src="foto_2.png" class="dekor foto-2-pink">
-        <img src="foto_8.png" class="dekor foto-8-pink">
-
         <img src="foto_1.png" class="dekor foto-1-biru">
         <img src="foto_9.png" class="dekor foto-9-biru">
+        <img src="foto_2.png" class="dekor foto-2-pink">
+        <img src="foto_8.png" class="dekor foto-8-pink">
 
         <img src="foto_3.png" class="dekor foto-3-hijau">
         <img src="foto_7.png" class="dekor foto-7-hijau">
@@ -122,12 +104,11 @@
 
         <div class="main-content">
             <img src="foto_11.png" class="foto-11-logo">
-            <a href="#" class="btn-buka">Buka Undangan</a>
+            <a href="#" class="btn-buka">BUKA UNDANGAN</a>
         </div>
     </div>
 
     <script>
-        // Script agar 100vh akurat di HP (mencegah kepotong address bar)
         function setHeight() {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
