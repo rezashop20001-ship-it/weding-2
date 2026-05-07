@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Undangan Digital A&A - Perfect Finish</title>
+    <title>Undangan Digital A&A - Perfect Finish Animated</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -33,36 +33,59 @@
             object-fit: contain;
         }
 
-        /* --- KOREKSI TERAKHIR: RUMAH (14) KECILIN & KEBAWAHIN --- */
-        .foto-14-rumah { 
-            bottom: 2% !important; /* Makin ke bawah supaya tiang hilang */
-            left: 50%; 
-            transform: translateX(-50%); 
-            width: 80% !important; /* Dikecilkan dari 95% ke 80% */
-            z-index: 5; 
-            opacity: 0.95;
+        /* --- KEYFRAMES ANIMASI MASUK --- */
+        @keyframes masukKanan {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        /* --- KOREKSI TERAKHIR: BURUNG (13) MAKIN BESAR --- */
-        .foto-13-burung { 
-            top: 8%; 
-            left: 8%; 
-            width: 180px !important; /* Ukuran jumbo biar kelihatan jelas */
-            z-index: 15; 
+        @keyframes masukKiri {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
-        /* --- ELEMEN LAIN (HARAM DIUBAH) --- */
-        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 32% !important; z-index: 25; }
-        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 32% !important; z-index: 25; }
-        .foto-2-pink { top: 20% !important; right: -2%; width: 35%; z-index: 20; }
-        .foto-8-pink { top: 20% !important; left: -2%; width: 35%; z-index: 20; }
+        @keyframes masukBawah {
+            from { transform: translate(-50%, 50px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        /* --- KEYFRAMES GERAK DEDAUNAN (LOOP) --- */
+        @keyframes gerakDaun {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(2deg) scale(1.02); }
+        }
+
+        /* Khusus 5 & 10: Goyang Kiri-Kanan */
+        @keyframes goyangSway {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-48%) rotate(1deg); }
+        }
+
+        /* --- POSISI ASLI (HARAM DIUBAH) + ANIMASI --- */
+        
+        /* Kelompok Kanan (1,2,3,4): Masuk Kanan ke Kiri */
+        .foto-1-biru { top: 0; right: 0; width: 40%; z-index: 30; animation: masukKanan 1.5s ease-out, gerakDaun 4s ease-in-out infinite 1.5s; }
+        .foto-2-pink { top: 20% !important; right: -2%; width: 35%; z-index: 20; animation: masukKanan 1.7s ease-out, gerakDaun 5s ease-in-out infinite 1.7s; }
+        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 32% !important; z-index: 25; animation: masukKanan 1.9s ease-out, gerakDaun 4.5s ease-in-out infinite 1.9s; }
+        .foto-4-biru { bottom: 0; right: 0; width: 40%; z-index: 50; animation: masukKanan 2.1s ease-out, gerakDaun 6s ease-in-out infinite 2.1s; }
+
+        /* Kelompok Kiri (6,7,8,9): Masuk Kiri ke Kanan */
+        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75%; z-index: 55; animation: masukBawah 1.5s ease-out; }
+        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 32% !important; z-index: 25; animation: masukKiri 1.9s ease-out, gerakDaun 4.5s ease-in-out infinite 1.9s; }
+        .foto-8-pink { top: 20% !important; left: -2%; width: 35%; z-index: 20; animation: masukKiri 1.7s ease-out, gerakDaun 5s ease-in-out infinite 1.7s; }
+        .foto-9-biru { top: 0; left: 0; width: 40%; z-index: 30; animation: masukKiri 1.5s ease-out, gerakDaun 4s ease-in-out infinite 1.5s; }
+
+        /* Kelompok Tengah/Bawah (5 & 10): Masuk Bawah ke Atas + Goyang Kiri Kanan */
+        .foto-5-biru { bottom: 0; left: 0; width: 40%; z-index: 50; animation: masukKiri 2.1s ease-out, gerakDaun 6s ease-in-out infinite 2.1s; }
+        .foto-10-pink-red { 
+            bottom: 5px; left: 50%; transform: translateX(-50%); width: 85%; z-index: 45; 
+            animation: masukBawah 1.8s ease-out, goyangSway 5s ease-in-out infinite 1.8s; 
+        }
+
+        /* --- ELEMEN STATIS --- */
+        .foto-14-rumah { bottom: 2% !important; left: 50%; transform: translateX(-50%); width: 80% !important; z-index: 5; opacity: 0.95; }
+        .foto-13-burung { top: 8%; left: 8%; width: 180px !important; z-index: 15; }
         .foto-12-bingkai { top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; object-position: top; z-index: 10; }
-        .foto-1-biru { top: 0; right: 0; width: 40%; z-index: 30; }
-        .foto-9-biru { top: 0; left: 0; width: 40%; z-index: 30; }
-        .foto-4-biru { bottom: 0; right: 0; width: 40%; z-index: 50; }
-        .foto-5-biru { bottom: 0; left: 0; width: 40%; z-index: 50; }
-        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75%; z-index: 55; }
-        .foto-10-pink-red { bottom: 5px; left: 50%; transform: translateX(-50%); width: 85%; z-index: 45; }
         
         .main-content {
             position: absolute;
@@ -101,10 +124,8 @@
         <img src="foto_9.png" class="dekor foto-9-biru">
         <img src="foto_2.png" class="dekor foto-2-pink">
         <img src="foto_8.png" class="dekor foto-8-pink">
-
         <img src="foto_3.png" class="dekor foto-3-hijau">
         <img src="foto_7.png" class="dekor foto-7-hijau">
-
         <img src="foto_10.png" class="dekor foto-10-pink-red">
         <img src="foto_4.png" class="dekor foto-4-biru">
         <img src="foto_5.png" class="dekor foto-5-biru">
