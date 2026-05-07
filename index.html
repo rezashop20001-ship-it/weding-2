@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Undangan Digital A&A - Perfect Animated Final</title>
+    <title>Undangan Digital A&A - Perfect Finish</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -16,109 +16,102 @@
         .master-container {
             position: relative; width: 100%;
             height: 100vh; height: calc(var(--vh, 1vh) * 100);
-            background-image: url('wallpaper.png'); background-size: cover;
-            background-position: center; overflow: hidden;
+            background-image: url('wallpaper.png');
+            background-size: cover; background-position: center;
+            overflow: hidden;
         }
 
-        .dekor { position: absolute; pointer-events: none; object-fit: contain; opacity: 0; }
+        .dekor { position: absolute; pointer-events: none; object-fit: contain; }
 
-        /* --- KEYFRAMES ANIMASI MASUK (DICEPATIN) --- */
-        @keyframes masukKananFast {
-            from { transform: translateX(80px); opacity: 0; }
+        /* --- KEYFRAMES ANIMASI --- */
+        @keyframes masukKanan {
+            from { transform: translateX(60px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
 
-        @keyframes masukKiriFast {
-            from { transform: translateX(-80px); opacity: 0; }
+        @keyframes masukKiri {
+            from { transform: translateX(-60px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
 
-        @keyframes masukBawahFast {
-            from { transform: translate(-50%, 80px); opacity: 0; }
+        @keyframes masukBawah {
+            from { transform: translate(-50%, 60px); opacity: 0; }
             to { transform: translate(-50%, 0); opacity: 1; }
         }
 
-        /* --- KEYFRAMES LOGO POP-UP JATUH (BARU) --- */
-        @keyframes logoPopFall {
-            0% { transform: translateY(-200px) scale(2); opacity: 0; }
-            60% { transform: translateY(10px) scale(1.1); opacity: 1; }
-            100% { transform: translateY(0) scale(1); opacity: 1; }
+        @keyframes popUpTimbul {
+            0% { transform: scale(2); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        /* --- KEYFRAMES BURUNG MENYEBERANG PENUH (BARU) --- */
         @keyframes burungNyeberang {
-            0% { left: -350px; top: 15%; opacity: 0; transform: rotate(5deg); }
+            0% { left: -300px; opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { left: 100%; top: 5%; opacity: 0; transform: rotate(-5deg); }
+            100% { left: 100%; opacity: 0; }
         }
 
-        /* --- KEYFRAMES GERAK LOOP (SAMA) --- */
-        @keyframes gerakDaun { 0%, 100% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(1.5deg) scale(1.015); } }
-        @keyframes goyangSway { 0%, 100% { transform: translateX(-50%) rotate(0deg); } 50% { transform: translateX(-48%) rotate(0.8deg); } }
+        @keyframes gerakDaun {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(1.5deg) scale(1.01); }
+        }
 
-        /* --- POSISI ASLI (HARAM DIUBAH) + ANIMASI BARU --- */
+        @keyframes goyangSway {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-49%) rotate(0.8deg); }
+        }
+
+        /* --- CSS TETAP (TATA LETAK TIDAK BERUBAH) --- */
         
-        /* Kelompok Kanan (1,2,3,4): Masuk Kanan Fast */
-        .foto-1-biru { top: 0; right: 0; width: 40%; z-index: 30; animation: masukKananFast 1.0s ease-out forwards 0.2s, gerakDaun 4s ease-in-out infinite 1.2s; }
-        .foto-2-pink { top: 20% !important; right: -2%; width: 35%; z-index: 20; animation: masukKananFast 1.1s ease-out forwards 0.3s, gerakDaun 5s ease-in-out infinite 1.4s; }
-        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 32% !important; z-index: 25; animation: masukKananFast 1.2s ease-out forwards 0.4s, gerakDaun 4.5s ease-in-out infinite 1.6s; }
-        .foto-4-biru { bottom: 0; right: 0; width: 40%; z-index: 50; animation: masukKananFast 1.3s ease-out forwards 0.5s, gerakDaun 6s ease-in-out infinite 1.8s; }
+        .foto-14-rumah { bottom: 2% !important; left: 50%; transform: translateX(-50%); width: 80% !important; z-index: 5; opacity: 0.95; }
+        
+        .foto-13-burung { 
+            top: 8%; left: -300px; width: 280px !important; z-index: 15; 
+            animation: burungNyeberang 10s linear infinite; 
+        }
 
-        /* Kelompok Kiri (6,7,8,9): Masuk Kiri Fast */
-        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75%; z-index: 55; animation: masukBawahFast 1.0s ease-out forwards 0.2s; }
-        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 32% !important; z-index: 25; animation: masukKiriFast 1.2s ease-out forwards 0.4s, gerakDaun 4.5s ease-in-out infinite 1.6s; }
-        .foto-8-pink { top: 20% !important; left: -2%; width: 35%; z-index: 20; animation: masukKiriFast 1.1s ease-out forwards 0.3s, gerakDaun 5s ease-in-out infinite 1.4s; }
-        .foto-9-biru { top: 0; left: 0; width: 40%; z-index: 30; animation: masukKiriFast 1.0s ease-out forwards 0.2s, gerakDaun 4s ease-in-out infinite 1.2s; }
+        /* Kelompok Kanan (Masuk Kanan) */
+        .foto-1-biru { top: 0; right: 0; width: 40%; z-index: 30; animation: masukKanan 1.2s ease-out forwards; }
+        .foto-2-pink { top: 20% !important; right: -2%; width: 35%; z-index: 20; animation: masukKanan 1.3s ease-out forwards; }
+        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 32% !important; z-index: 25; animation: masukKanan 1.4s ease-out forwards; }
+        .foto-4-biru { bottom: 0; right: 0; width: 40%; z-index: 50; animation: masukKanan 1.5s ease-out forwards; }
 
-        /* Kelompok Bawah (5, 10): Masuk Bawah Fast + Sway */
-        .foto-5-biru { bottom: 0; left: 0; width: 40%; z-index: 50; animation: masukKiriFast 1.3s ease-out forwards 0.5s, gerakDaun 6s ease-in-out infinite 1.8s; }
+        /* Kelompok Kiri (Masuk Kiri) */
+        .foto-9-biru { top: 0; left: 0; width: 40%; z-index: 30; animation: masukKiri 1.2s ease-out forwards; }
+        .foto-8-pink { top: 20% !important; left: -2%; width: 35%; z-index: 20; animation: masukKiri 1.3s ease-out forwards; }
+        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 32% !important; z-index: 25; animation: masukKiri 1.4s ease-out forwards; }
+        .foto-5-biru { bottom: 0; left: 0; width: 40%; z-index: 50; animation: masukKiri 1.5s ease-out forwards; }
+
+        /* Bawah & Tengah */
+        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75%; z-index: 55; animation: masukBawah 1.2s ease-out forwards; }
         .foto-10-pink-red { 
             bottom: 5px; left: 50%; transform: translateX(-50%); width: 85%; z-index: 45; 
-            animation: masukBawahFast 1.2s ease-out forwards 0.4s, goyangSway 5s ease-in-out infinite 1.6s; 
+            animation: masukBawah 1.4s ease-out forwards, goyangSway 5s ease-in-out infinite 1.4s; 
         }
 
-        /* --- STATIS / ANIMASI KHUSUS --- */
-        .foto-14-rumah { bottom: 2% !important; left: 50%; transform: translateX(-50%); width: 80% !important; z-index: 5; opacity: 0.95; }
-        .foto-12-bingkai { top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; object-position: top; z-index: 10; opacity: 1; }
+        .foto-12-bingkai { top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; object-position: top; z-index: 10; }
         
-        /* BURUNG JUMBO NYEBERANG PENUH */
-        .foto-13-burung { 
-            width: 300px !important; /* Jumbo Bep! */
-            z-index: 15; 
-            animation: burungNyeberang 12s linear infinite 1s; /* Nyeberang pelan tapi pasti */
-            opacity: 0;
-        }
-
-        /* LOGO & TOMBOL AREA */
         .main-content {
             position: absolute;
             top: 48%; left: 50%;
             transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 100;
+            display: flex; flex-direction: column; align-items: center; z-index: 100;
         }
 
-        /* LOGO POP-UP JATUH */
         .foto-11-logo { 
             width: 180px; margin-bottom: 25px; 
-            opacity: 0;
-            animation: logoPopFall 1.5s ease-in-out forwards 0.5s; 
+            animation: popUpTimbul 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; 
         }
 
-        /* TOMBOL MASUK DARI BAWAH */
         .btn-buka {
             background-color: #96693d; color: white;
             padding: 14px 40px; border-radius: 30px;
             text-decoration: none; font-size: 13px; font-weight: bold;
             letter-spacing: 2px; text-transform: uppercase;
-            white-space: nowrap; display: inline-block;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            /* Tombol masuk dari bawah */
             opacity: 0;
-            /* Masuk dari bawah ke posisi aslinya */
-            animation: masukBawahFast 1.2s ease-out forwards 1.8s; 
+            animation: masukBawah 1.2s ease-out forwards 1s; 
         }
     </style>
 </head>
@@ -127,7 +120,6 @@
     <div class="master-container">
         <img src="foto_12.png" class="dekor foto-12-bingkai">
         <img src="foto_14.png" class="dekor foto-14-rumah">
-        
         <img src="foto_13.gif" class="dekor foto-13-burung">
 
         <img src="foto_1.png" class="dekor foto-1-biru">
