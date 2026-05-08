@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
-        /* --- GLOBAL & SECTION 1 STYLE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html {
@@ -21,6 +20,7 @@
             font-family: 'Montserrat', sans-serif;
         }
 
+        /* --- CSS SECTION 1 (COVER) --- */
         .master-container {
             position: relative;
             width: 100%;
@@ -39,7 +39,6 @@
             object-fit: contain;
         }
 
-        /* --- KEYFRAMES ANIMASI SECTION 1 --- */
         @keyframes masukKanan {
             from { transform: translateX(100px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -79,7 +78,6 @@
             50% { transform: translateX(-48%) rotate(1deg); }
         }
 
-        /* --- TATA LETAK DEKORASI SECTION 1 --- */
         .foto-14-rumah { bottom: 2% !important; left: 50%; transform: translateX(-50%); width: 80% !important; z-index: 5; opacity: 0; animation: masukBawahRumah 1.5s ease-out forwards; }
         .foto-13-burung { top: 8%; left: -350px; width: 300px !important; z-index: 15; animation: burungNyeberang 12s linear infinite 1s; }
         .foto-1-biru { top: 0; right: 0; width: 35% !important; z-index: 30; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
@@ -97,17 +95,17 @@
         .main-content { position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; z-index: 100; }
         .foto-11-logo { width: 180px; margin-bottom: 25px; animation: popUpTimbul 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards 0.5s; }
         
-        .btn-buka {
-            background-color: #96693d; color: white; padding: 14px 40px; border-radius: 30px;
-            text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 2px;
+        .btn-buka { 
+            background-color: #96693d; color: white; padding: 14px 40px; border-radius: 30px; 
+            text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 2px; 
             text-transform: uppercase; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             opacity: 0; animation: masukBawah 1s ease-out forwards 1.5s;
         }
 
-        /* --- SECTION 2 & 3 STYLE --- */
-        #content-wrapper { display: none; } /* Tersembunyi sampai tombol diklik */
+        /* --- CSS SECTION 2 (ISI) --- */
+        #main-invitation { display: none; }
 
-        .section-2 {
+        .hero-section {
             position: relative;
             width: 100%;
             height: 100vh;
@@ -119,44 +117,66 @@
             align-items: center;
             text-align: center;
             color: white;
+            z-index: 1;
         }
 
-        .hero-content { margin-top: 15vh; z-index: 5; text-shadow: 2px 2px 8px rgba(0,0,0,0.4); }
-        .hero-content h3, .hero-content h1, .hero-content p { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
-        .hero-content h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; }
-        .hero-content h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; margin: 15px 0; font-weight: 400; }
-        .hero-content p { letter-spacing: 4px; font-size: 1rem; }
+        .hero-content { margin-top: 15vh; z-index: 2; transition: opacity 0.5s ease; }
+        .hero-content h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; opacity: 0; transform: translateY(20px); }
+        .hero-content h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; margin: 10px 0; opacity: 0; transform: translateY(20px); }
+        .hero-content p.date { letter-spacing: 4px; font-size: 1rem; opacity: 0; transform: translateY(20px); }
 
-        .show-text { opacity: 1 !important; transform: translateY(0) !important; }
+        .reveal { animation: fadeInUp 1.2s ease forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-        .swipe-up { position: absolute; bottom: 40px; transition: opacity 0.6s ease; }
+        .swipe-up { position: absolute; bottom: 40px; text-align: center; transition: opacity 0.5s ease; }
 
         /* --- PIRINGAN MUSIK --- */
         .music-disc-container {
             position: fixed;
             bottom: 80px;
             right: 25px;
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             z-index: 9999;
             cursor: pointer;
             display: none;
         }
         .music-disc-container img { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 0 15px rgba(0,0,0,0.3); }
-        .rotate-disc { animation: spin 6s linear infinite; }
+        .rotating { animation: spin 8s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- SECTION 3: AR-RUM --- */
-        .ayat-section { padding: 100px 30px; background-color: #fcf8f0; text-align: center; position: relative; z-index: 10; }
-        .ayat-content { max-width: 500px; margin: 0 auto; opacity: 0; transform: translateY(-50px); transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .ayat-content.show-ayat { opacity: 1; transform: translateY(0); }
-        .ayat-content p { font-size: 0.9rem; line-height: 1.8; color: #555; font-style: italic; }
-        .ayat-content b { display: block; margin-top: 15px; color: #8d6e63; font-size: 0.85rem; letter-spacing: 1px; }
+        /* --- SECTION AR-RUM --- */
+        .ayat-section {
+            position: relative;
+            background-color: #fcf8f0;
+            padding: 100px 30px;
+            text-align: center;
+            z-index: 10;
+            min-height: 40vh;
+        }
+        .ayat-wrap {
+            max-width: 550px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(-40px);
+            transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1.0);
+        }
+        .ayat-wrap.show-ayat { opacity: 1; transform: translateY(0); }
+        .ayat-wrap p { font-size: 0.95rem; line-height: 1.8; color: #444; font-style: italic; }
+        .ayat-wrap b { display: block; margin-top: 20px; color: #8d6e63; font-size: 0.85rem; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-    <div class="master-container" id="coverSection">
+    <audio id="weddingSong" loop>
+        <source src="lagu_nikah.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-disc-container" id="musicBtn" onclick="toggleMusic()">
+        <img src="music_disc.png" id="discImg" alt="Disc">
+    </div>
+
+    <div id="cover-section" class="master-container">
         <img src="foto_12.png" class="dekor foto-12-bingkai">
         <img src="foto_14.png" class="dekor foto-14-rumah">
         <img src="foto_13.gif" class="dekor foto-13-burung">
@@ -177,47 +197,35 @@
         </div>
     </div>
 
-    <div id="content-wrapper">
-        <audio id="myAudio" loop>
-            <source src="lagu_nikah.mp3" type="audio/mpeg">
-        </audio>
-
-        <div class="music-disc-container" id="musicToggle" onclick="handleMusic()">
-            <img src="music_disc.png" id="discImg" alt="Music Disc">
-        </div>
-
-        <div class="section-2" id="mainHero">
-            <div class="hero-content">
-                <h3 id="t1">The Wedding of</h3>
-                <h1 id="t2">Elfahreza & Bunga</h1>
-                <p id="t3">26 . 09 . 2027</p>
+    <div id="main-invitation">
+        <div class="hero-section">
+            <div class="hero-content" id="mainText">
+                <h3 id="line1">The Wedding of</h3>
+                <h1 id="line2">Elfahreza & Bunga</h1>
+                <p class="date" id="line3">26 . 09 . 2027</p>
             </div>
 
-            <div class="swipe-up" id="swipeIcon">
+            <div class="swipe-up" id="swipeIndicator">
                 <p style="font-size: 10px; letter-spacing: 2px;">SWIPE UP</p>
                 <span style="font-size: 20px;">↓</span>
             </div>
         </div>
 
         <section class="ayat-section">
-            <div class="ayat-content" id="ayatBox">
+            <div class="ayat-wrap" id="ayatBox">
                 <p>"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."</p>
                 <b>QS. AR-RUM: 21</b>
             </div>
         </section>
-
-        <div style="height: 100vh; background: #eee; padding-top: 50px; text-align: center;">
-            <p>Section Berikutnya...</p>
-        </div>
     </div>
 
     <script>
-        const audio = document.getElementById('myAudio');
+        const song = document.getElementById('weddingSong');
         const disc = document.getElementById('discImg');
-        const musicBtn = document.getElementById('musicToggle');
-        let playing = false;
+        const musicBtn = document.getElementById('musicBtn');
+        let isPlaying = false;
 
-        // Atur Tinggi Layar
+        // Atur VH untuk mobile
         function setHeight() {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -225,52 +233,54 @@
         window.addEventListener('resize', setHeight);
         setHeight();
 
-        // FUNGSI UTAMA: BUKA UNDANGAN
+        // FUNGSI BUKA UNDANGAN
         function bukaUndangan() {
-            // Sembunyikan Cover & Tampilkan Konten
-            document.getElementById('coverSection').style.display = 'none';
-            document.getElementById('content-wrapper').style.display = 'block';
+            // Sembunyikan Cover
+            document.getElementById('cover-section').style.display = 'none';
+            // Tampilkan Isi
+            document.getElementById('main-invitation').style.display = 'block';
             musicBtn.style.display = 'block';
 
-            // Jalankan urutan teks hero muncul
-            setTimeout(() => document.getElementById('t1').classList.add('show-text'), 500);
-            setTimeout(() => document.getElementById('t2').classList.add('show-text'), 1000);
-            setTimeout(() => document.getElementById('t3').classList.add('show-text'), 1500);
+            // Jalankan Animasi Teks Berurutan
+            setTimeout(() => document.getElementById('line1').classList.add('reveal'), 500);
+            setTimeout(() => document.getElementById('line2').classList.add('reveal'), 1000);
+            setTimeout(() => document.getElementById('line3').classList.add('reveal'), 1500);
             
-            // Auto-play musik
-            audio.play();
-            disc.classList.add('rotate-disc');
-            playing = true;
+            // Putar musik
+            song.play();
+            disc.classList.add('rotating');
+            isPlaying = true;
         }
 
-        // Fungsi Play/Pause Musik
-        function handleMusic() {
-            if (playing) {
-                audio.pause();
-                disc.classList.remove('rotate-disc');
+        // Play/Pause Musik
+        function toggleMusic() {
+            if (isPlaying) {
+                song.pause();
+                disc.classList.remove('rotating');
             } else {
-                audio.play();
-                disc.classList.add('rotate-disc');
+                song.play();
+                disc.classList.add('rotating');
             }
-            playing = !playing;
+            isPlaying = !isPlaying;
         }
 
-        // Deteksi Scroll
+        // Logika Scroll
         window.onscroll = function() {
-            if (document.getElementById('content-wrapper').style.display === 'block') {
-                let scrollPos = window.scrollY;
-                const swipe = document.getElementById('swipeIcon');
+            if (document.getElementById('main-invitation').style.display === 'block') {
+                let scrollValue = window.scrollY;
+                const mainText = document.getElementById('mainText');
+                const swipe = document.getElementById('swipeIndicator');
                 const ayat = document.getElementById('ayatBox');
 
-                // Hilangkan Swipe Up
-                if (scrollPos > 60) {
+                if (scrollValue > 100) {
+                    mainText.style.opacity = "0";
                     swipe.style.opacity = "0";
                 } else {
+                    mainText.style.opacity = "1";
                     swipe.style.opacity = "1";
                 }
 
-                // Munculkan Ar-Rum
-                if (scrollPos > 200) {
+                if (scrollValue > 250) {
                     ayat.classList.add('show-ayat');
                 }
             }
