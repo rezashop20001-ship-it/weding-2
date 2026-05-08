@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Undangan Digital A&A - Final Banget</title>
+    <title>Undangan Digital A&A - Perfect Finish Animated</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -33,41 +33,78 @@
             object-fit: contain;
         }
 
-        /* --- NOMOR 14 & 13: JANGAN DIUBAH --- */
-        .foto-14-rumah { 
-            bottom: 2% !important; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            width: 80% !important; 
-            z-index: 5; 
-            opacity: 0.95;
+        /* --- KEYFRAMES ANIMASI (SUNTIKAN NYAWA) --- */
+        @keyframes masukKanan {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
+        @keyframes masukKiri {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes masukBawah {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes masukBawahCenter {
+            from { transform: translate(-50%, 100px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        @keyframes popUpTimbul {
+            0% { transform: scale(3); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes burungNyeberang {
+            0% { left: -350px; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        @keyframes gerakDaun {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(2deg) scale(1.02); }
+        }
+
+        @keyframes goyangSway {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-48%) rotate(1.5deg); }
+        }
+
+        /* --- TATA LETAK ASLI (HARAM DIUBAH) + ANIMASI --- */
+
+        .foto-14-rumah { bottom: 2% !important; left: 50%; transform: translateX(-50%); width: 80% !important; z-index: 5; opacity: 0.95; }
+        
+        /* BURUNG JUMBO NYEBERANG */
         .foto-13-burung { 
-            top: 8%; 
-            left: 8%; 
-            width: 180px !important; 
-            z-index: 15; 
+            top: 8%; left: -350px; width: 300px !important; z-index: 15; 
+            animation: burungNyeberang 12s linear infinite; 
         }
 
-        /* --- KOREKSI TERAKHIR: 1&9, 2&8, 3&7 DIKECILKAN SEDIKIT --- */
-        .foto-1-biru { top: 0; right: 0; width: 35% !important; z-index: 30; }
-        .foto-9-biru { top: 0; left: 0; width: 35% !important; z-index: 30; }
-        
-        .foto-2-pink { top: 20% !important; right: -2%; width: 32% !important; z-index: 20; }
-        .foto-8-pink { top: 20% !important; left: -2%; width: 32% !important; z-index: 20; }
-        
-        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 28% !important; z-index: 25; }
-        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 28% !important; z-index: 25; }
+        /* KELOMPOK KANAN (1,2,3,4) - Masuk Kanan ke Kiri */
+        .foto-1-biru { top: 0; right: 0; width: 40%; z-index: 30; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-2-pink { top: 20% !important; right: -2%; width: 35%; z-index: 20; animation: masukKanan 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 32% !important; z-index: 25; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-4-biru { bottom: 0; right: 0; width: 40%; z-index: 50; animation: masukKanan 1s ease-out forwards, gerakDaun 6s ease-in-out infinite 1s; }
 
-        /* --- KOREKSI TERAKHIR: 4, 5, 6, 10 DIBESARKAN SEDIKIT --- */
-        .foto-4-biru { bottom: 0; right: 0; width: 45% !important; z-index: 50; }
-        .foto-5-biru { bottom: 0; left: 0; width: 45% !important; z-index: 50; }
-        
-        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 85% !important; z-index: 55; }
-        .foto-10-pink-red { bottom: 5px; left: 50%; transform: translateX(-50%); width: 95% !important; z-index: 45; }
+        /* KELOMPOK KIRI (6,7,8,9) - Masuk Kiri ke Kanan */
+        .foto-9-biru { top: 0; left: 0; width: 40%; z-index: 30; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-8-pink { top: 20% !important; left: -2%; width: 35%; z-index: 20; animation: masukKiri 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 32% !important; z-index: 25; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75%; z-index: 55; animation: masukBawahCenter 1s ease-out forwards; }
 
-        /* --- LAINNYA JANGAN DIUBAH --- */
+        /* KHUSUS 5 & 10 - Masuk Bawah + Goyang Kiri Kanan */
+        .foto-5-biru { bottom: 0; left: 0; width: 40%; z-index: 50; animation: masukBawah 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-10-pink-red { 
+            bottom: 5px; left: 50%; transform: translateX(-50%); width: 85%; z-index: 45; 
+            animation: masukBawahCenter 1s ease-out forwards, goyangSway 5s ease-in-out infinite 1s; 
+        }
+
         .foto-12-bingkai { top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; object-position: top; z-index: 10; }
         
         .main-content {
@@ -79,7 +116,14 @@
             align-items: center;
             z-index: 100;
         }
-        .foto-11-logo { width: 180px; margin-bottom: 25px; }
+
+        /* LOGO POP UP TIMBUL */
+        .foto-11-logo { 
+            width: 180px; margin-bottom: 25px; 
+            animation: popUpTimbul 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+        }
+
+        /* TOMBOL MASUK DARI BAWAH */
         .btn-buka {
             background-color: #96693d;
             color: white;
@@ -93,6 +137,8 @@
             white-space: nowrap;
             display: inline-block;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: masukBawah 1s ease-out forwards 1.2s;
         }
     </style>
 </head>
