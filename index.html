@@ -33,7 +33,7 @@
             object-fit: contain;
         }
 
-        /* --- KEYFRAMES ANIMASI (SUNTIKAN NYAWA) --- */
+        /* --- KEYFRAMES ANIMASI (SUNTIKAN NYAWA BARU) --- */
         @keyframes masukKanan {
             from { transform: translateX(100px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
@@ -54,14 +54,14 @@
             to { transform: translate(-50%, 0); opacity: 1; }
         }
 
-        /* Khusus Rumah Adat: Masuk Bawah tanpa goyang */
         @keyframes masukBawahRumah {
             from { transform: translate(-50%, 150px); opacity: 0; }
             to { transform: translate(-50%, 0); opacity: 0.95; }
         }
 
+        /* POLESAN: LOGO TIMBUL SEDANG (DIKECILKAN DARI 3 JADI 1.5) */
         @keyframes popUpTimbul {
-            0% { transform: scale(3); opacity: 0; }
+            0% { transform: scale(1.5); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
 
@@ -72,55 +72,49 @@
             100% { left: 100%; opacity: 0; }
         }
 
+        /* POLESAN: GERAK HIDUP (SWAYING LEMBUT AGAR TIDAK KELUAR FRAME) */
         @keyframes gerakDaun {
             0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(1.5deg) scale(1.01); }
+            50% { transform: rotate(2deg) scale(1.02); }
         }
 
+        /* POLESAN: 5 & 10 GERAK KIRI KANAN BERGANTIAN */
         @keyframes goyangSway {
-            0%, 100% { transform: translateX(-50%) rotate(0deg); }
-            50% { transform: translateX(-48%) rotate(1deg); }
+            0%, 100% { transform: translateX(-50%) rotate(-1.5deg); }
+            50% { transform: translateX(-49%) rotate(1.5deg); }
         }
 
-        /* --- TATA LETAK ASLI + POLESAN UKURAN (1,9, 2,8, 3,7 DIKECILKAN) --- */
+        /* --- TATA LETAK ASLI (DIJAMIN TIDAK BERGESER) --- */
 
-        /* RUMAH ADAT MASUK DARI BAWAH (BARU) */
         .foto-14-rumah { 
             bottom: 2% !important; 
             left: 50%; 
             transform: translateX(-50%); 
             width: 80% !important; 
             z-index: 5; 
-            opacity: 0; /* Mulai dari hilang */
+            opacity: 0;
             animation: masukBawahRumah 1.5s ease-out forwards; 
         }
         
-        /* BURUNG JUMBO NYEBERANG (TETAP MANTEP) */
         .foto-13-burung { 
             top: 8%; left: -350px; width: 300px !important; z-index: 15; 
             animation: burungNyeberang 12s linear infinite 1s; 
         }
 
-        /* KELOMPOK KANAN (Masuk Kanan + UKURAN DIKECILKAN) */
-        .foto-1-biru { top: 0; right: 0; width: 35% !important; z-index: 30; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
-        .foto-2-pink { top: 20% !important; right: -2%; width: 30% !important; z-index: 20; animation: masukKanan 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
-        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 28% !important; z-index: 25; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
-        
-        /* Bunga Lantai 4 (TETAP JUMBO) */
-        .foto-4-biru { bottom: 0; right: 0; width: 40%; z-index: 50; animation: masukKanan 1s ease-out forwards, gerakDaun 6s ease-in-out infinite 1s; }
+        .foto-1-biru { top: 0; right: 0; width: 35% !important; z-index: 30; transform-origin: top right; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-2-pink { top: 20% !important; right: -2%; width: 30% !important; z-index: 20; transform-origin: right center; animation: masukKanan 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 28% !important; z-index: 25; transform-origin: bottom right; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-4-biru { bottom: 0; right: 0; width: 40% !important; z-index: 50; transform-origin: bottom right; animation: masukKanan 1s ease-out forwards, gerakDaun 6s ease-in-out infinite 1s; }
 
-        /* KELOMPOK KIRI (Masuk Kiri + UKURAN DIKECILKAN) */
-        .foto-9-biru { top: 0; left: 0; width: 35% !important; z-index: 30; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
-        .foto-8-pink { top: 20% !important; left: -2%; width: 30% !important; z-index: 20; animation: masukKiri 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
-        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 28% !important; z-index: 25; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-9-biru { top: 0; left: 0; width: 35% !important; z-index: 30; transform-origin: top left; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-8-pink { top: 20% !important; left: -2%; width: 30% !important; z-index: 20; transform-origin: left center; animation: masukKiri 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 28% !important; z-index: 25; transform-origin: bottom left; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
         
-        /* Bunga Lantai 6 (TETAP JUMBO) */
-        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75%; z-index: 55; animation: masukBawahCenter 1s ease-out forwards; }
+        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75% !important; z-index: 55; animation: masukBawahCenter 1s ease-out forwards; }
 
-        /* KHUSUS 5 & 10 (TETAP JUMBO + Masuk Bawah + Goyang) */
-        .foto-5-biru { bottom: 0; left: 0; width: 40%; z-index: 50; animation: masukBawah 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-5-biru { bottom: 0; left: 0; width: 40% !important; z-index: 50; transform-origin: bottom left; animation: masukBawah 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1.5s; }
         .foto-10-pink-red { 
-            bottom: 5px; left: 50%; transform: translateX(-50%); width: 85%; z-index: 45; 
+            bottom: 5px; left: 50%; transform: translateX(-50%); width: 85% !important; z-index: 45; 
             animation: masukBawahCenter 1s ease-out forwards, goyangSway 5s ease-in-out infinite 1s; 
         }
 
@@ -136,13 +130,11 @@
             z-index: 100;
         }
 
-        /* LOGO POP UP TIMBUL (TETAP PAS) */
         .foto-11-logo { 
             width: 180px; margin-bottom: 25px; 
-            animation: popUpTimbul 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards 0.5s; /* Delay dikit biar bunga masuk duluan */
+            animation: popUpTimbul 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards 0.5s; 
         }
 
-        /* TOMBOL MASUK DARI BAWAH (TETAP OKE) */
         .btn-buka {
             background-color: #96693d;
             color: white;
@@ -157,7 +149,7 @@
             display: inline-block;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             opacity: 0;
-            animation: masukBawah 1s ease-out forwards 1.5s; /* Muncul terakhir setelah logo */
+            animation: masukBawah 1s ease-out forwards 1.5s; 
         }
     </style>
 </head>
