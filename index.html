@@ -14,16 +14,16 @@
         
         body, html {
             width: 100%;
-            height: 100%;
             overflow-x: hidden;
             font-family: 'Montserrat', sans-serif;
-            background-color: #FFF3DD;
+            background-color: #f0f0f0;
+            scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
         }
 
-        /* --- SECTION 1: COVER --- */
+        /* --- SECTION 1: COVER (ANIMATED) --- */
         #section-1 {
-            position: fixed; /* Menutup layar penuh */
+            position: fixed;
             top: 0; left: 0;
             width: 100%;
             height: 100vh;
@@ -73,6 +73,7 @@
         
         .main-content { position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; z-index: 100; }
         .foto-11-logo { width: 180px; margin-bottom: 25px; animation: popUpTimbul 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards 0.5s; }
+        
         .btn-buka {
             background-color: #96693d; color: white; padding: 14px 40px; border-radius: 30px;
             text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 2px;
@@ -81,10 +82,8 @@
             animation: masukBawah 1s ease-out forwards 1.5s;
         }
 
-        /* --- SECTION 2: HERO & AYAT --- */
-        #section-2 {
-            display: none; /* Sembunyi sampai tombol diklik */
-        }
+        /* --- SECTION 2: HERO & AYAT (THE CONTENT) --- */
+        #section-2 { display: none; }
 
         .hero-section {
             position: relative;
@@ -92,49 +91,46 @@
             height: 100vh;
             background: url('foto_berdua.png') no-repeat center center;
             background-size: cover;
+            background-attachment: fixed;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding-top: 15vh;
-            color: #4A4A4A;
             text-align: center;
+            overflow: hidden;
         }
 
-        .hero-text {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(2px);
-            padding: 20px;
-            border-radius: 15px;
-        }
+        .hero-content { margin-top: 15vh; color: #4A4A4A; z-index: 2; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(2px); padding: 20px; border-radius: 15px; }
+        .hero-content h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; opacity: 0; transform: translateY(30px); }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-weight: bold; font-size: 2.5rem; margin: 10px 0; opacity: 0; transform: translateY(30px); }
+        .hero-content p { letter-spacing: 3px; font-size: 1.1rem; opacity: 0; transform: translateY(30px); }
 
-        .hero-section h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; margin-bottom: 10px; }
-        .hero-section h1 { font-family: 'Playfair Display', serif; font-weight: bold; font-size: 2.5rem; margin-bottom: 5px; }
-        .hero-section p.date { letter-spacing: 3px; font-size: 1.1rem; }
+        .animate-up { animation: easeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        @keyframes easeUp { to { opacity: 1; transform: translateY(0); } }
+
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
 
         .swipe-up {
-            position: absolute; bottom: 30px; display: flex; flex-direction: column;
-            align-items: center; font-size: 0.8rem; opacity: 0.8; animation: bounce 2s infinite;
+            position: absolute; bottom: 40px; display: flex; flex-direction: column;
+            align-items: center; color: #4A4A4A; transition: opacity 0.5s ease;
+            animation: bounce 2s infinite;
         }
 
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+        .ayat-section {
+            position: relative; z-index: 10; padding: 100px 30px;
+            background-color: #FFF3DD; text-align: center;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        }
 
-        .ayat-section { padding: 80px 30px; text-align: center; background-color: #FFF3DD; position: relative; overflow: hidden; }
-        .text-arab { font-size: 1.5rem; line-height: 2.5rem; margin-bottom: 25px; color: #96693d; font-weight: bold; }
-        .text-indo { font-size: 0.95rem; font-style: italic; line-height: 1.6rem; color: #555; margin-bottom: 20px; }
+        .text-arab { font-size: 1.5rem; line-height: 2.8rem; margin-bottom: 30px; color: #96693d; font-weight: bold; }
+        .text-indo { font-size: 0.95rem; font-style: italic; line-height: 1.8rem; color: #555; margin-bottom: 25px; }
         .ayat-source { font-weight: bold; color: #96693d; letter-spacing: 1px; }
 
-        .music-disc {
-            position: absolute; right: -20px; bottom: 50px; width: 80px;
-            opacity: 0.6; animation: spin 5s linear infinite;
-        }
-
+        .music-disc { position: absolute; right: 20px; bottom: 40px; width: 70px; animation: spin 8s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        @media (max-width: 480px) {
-            .hero-section h1 { font-size: 2rem; }
-            .text-arab { font-size: 1.3rem; }
-        }
+        @media (max-width: 480px) { .hero-content h1 { font-size: 2.2rem; } }
     </style>
 </head>
 <body>
@@ -164,21 +160,22 @@
 
     <div id="section-2">
         <section class="hero-section">
-            <div class="hero-text" data-aos="fade-down" data-aos-duration="1500">
-                <h3>The Wedding of</h3>
-                <h1>Elfahreza & Bunga</h1>
-                <p class="date">27.08.2026</p>
+            <div class="hero-content">
+                <h3 id="txt1">The Wedding of</h3>
+                <h1 id="txt2">Aliandra & Adinda</h1>
+                <p id="txt3">26.09.2027</p>
             </div>
-            <div class="swipe-up">
-                <span>Swipe Up</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+
+            <div class="swipe-up" id="swipeIcon">
+                <small>Swipe Up</small>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
             </div>
         </section>
 
         <section class="ayat-section">
-            <img src="music_disc.png" class="music-disc" alt="Music Disc">
-            <div class="container" data-aos="fade-up" data-aos-duration="1500">
-                <p class="text-arab">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَهُمْ مَوَدَّةً وَرَحْمَةً</p>
+            <img src="music_disc.png" class="music-disc">
+            <div data-aos="fade-up" data-aos-duration="1200">
+                <p class="text-arab">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلỆهَا وَجَعَلَ بَيْنَهُمْ مَوَدَّةً وَرَحْمَةً</p>
                 <p class="text-indo">
                     "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir."
                 </p>
@@ -189,8 +186,8 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // AOS Init
-        AOS.init({ once: true });
+        // Inisialisasi AOS
+        AOS.init({ once: false });
 
         // Fix Mobile Height
         function setHeight() {
@@ -205,16 +202,35 @@
             const s1 = document.getElementById('section-1');
             const s2 = document.getElementById('section-2');
 
+            // Efek Hilang Section 1
             s1.style.opacity = "0";
             s1.style.visibility = "hidden";
             
             setTimeout(() => {
                 s1.style.display = "none";
                 s2.style.display = "block";
+                
+                // Trigger Animasi Teks Section 2
+                document.getElementById('txt1').classList.add('animate-up', 'delay-1');
+                document.getElementById('txt2').classList.add('animate-up', 'delay-2');
+                document.getElementById('txt3').classList.add('animate-up', 'delay-3');
+                
                 window.scrollTo(0, 0);
                 AOS.refresh();
             }, 800);
         }
+
+        // Logika Swipe Up Hilang Saat Scroll
+        window.onscroll = function() {
+            let icon = document.getElementById('swipeIcon');
+            if (icon) {
+                if (window.scrollY > 50) {
+                    icon.style.opacity = "0";
+                } else {
+                    icon.style.opacity = "1";
+                }
+            }
+        };
     </script>
 </body>
 </html>
