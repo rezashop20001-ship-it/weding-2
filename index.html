@@ -3,189 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Undangan Digital A&A - Perfect Finish Animated</title>
+    <title>Undangan Digital A&A - Perfect Finish</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
+        /* --- GLOBAL STYLE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html {
             width: 100%;
             height: 100%;
-            overflow-y: auto;
             overflow-x: hidden;
-            background-color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFF3DD;
             -webkit-overflow-scrolling: touch;
+        }
+
+        /* --- SECTION 1: COVER --- */
+        #section-1 {
+            position: fixed; /* Menutup layar penuh */
+            top: 0; left: 0;
+            width: 100%;
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+            z-index: 9999;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s;
         }
 
         .master-container {
             position: relative;
             width: 100%;
-            height: 100vh;
-            height: calc(var(--vh, 1vh) * 100);
+            height: 100%;
             background-image: url('wallpaper.png');
             background-size: cover;
             background-position: center;
-            overflow: hidden;
         }
 
-        .dekor {
-            position: absolute;
-            pointer-events: none;
-            object-fit: contain;
-        }
+        .dekor { position: absolute; pointer-events: none; object-fit: contain; }
 
-        /* --- KEYFRAMES ANIMASI (SUNTIKAN NYAWA BARU) --- */
-        @keyframes masukKanan {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+        /* Keyframes Section 1 */
+        @keyframes masukKanan { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes masukKiri { from { transform: translateX(-100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes masukBawah { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes masukBawahCenter { from { transform: translate(-50%, 100px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+        @keyframes masukBawahRumah { from { transform: translate(-50%, 150px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 0.95; } }
+        @keyframes popUpTimbul { 0% { transform: scale(3); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes burungNyeberang { 0% { left: -350px; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+        @keyframes gerakDaun { 0%, 100% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(1.5deg) scale(1.01); } }
+        @keyframes goyangSway { 0%, 100% { transform: translateX(-50%) rotate(0deg); } 50% { transform: translateX(-48%) rotate(1deg); } }
 
-        @keyframes masukKiri {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes masukBawah {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes masukBawahCenter {
-            from { transform: translate(-50%, 100px); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
-        }
-
-        @keyframes masukBawahRumah {
-            from { transform: translate(-50%, 150px); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 0.95; }
-        }
-
-        /* POLESAN: LOGO TIMBUL SEDANG (DIKECILKAN DARI 3 JADI 1.5) */
-        @keyframes popUpTimbul {
-            0% { transform: scale(1.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes burungNyeberang {
-            0% { left: -350px; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { left: 100%; opacity: 0; }
-        }
-
-        /* POLESAN: GERAK HIDUP (SWAYING LEMBUT AGAR TIDAK KELUAR FRAME) */
-        @keyframes gerakDaun {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(2deg) scale(1.02); }
-        }
-
-        /* POLESAN: 5 & 10 GERAK KIRI KANAN BERGANTIAN */
-        @keyframes goyangSway {
-            0%, 100% { transform: translateX(-50%) rotate(-1.5deg); }
-            50% { transform: translateX(-49%) rotate(1.5deg); }
-        }
-
-        /* --- TATA LETAK ASLI (DIJAMIN TIDAK BERGESER) --- */
-
-        .foto-14-rumah { 
-            bottom: 2% !important; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            width: 80% !important; 
-            z-index: 5; 
-            opacity: 0;
-            animation: masukBawahRumah 1.5s ease-out forwards; 
-        }
-        
-        .foto-13-burung { 
-            top: 8%; left: -350px; width: 300px !important; z-index: 15; 
-            animation: burungNyeberang 12s linear infinite 1s; 
-        }
-
-        .foto-1-biru { top: 0; right: 0; width: 35% !important; z-index: 30; transform-origin: top right; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
-        .foto-2-pink { top: 20% !important; right: -2%; width: 30% !important; z-index: 20; transform-origin: right center; animation: masukKanan 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
-        .foto-3-hijau { bottom: 12% !important; right: -5px !important; width: 28% !important; z-index: 25; transform-origin: bottom right; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
-        .foto-4-biru { bottom: 0; right: 0; width: 40% !important; z-index: 50; transform-origin: bottom right; animation: masukKanan 1s ease-out forwards, gerakDaun 6s ease-in-out infinite 1s; }
-
-        .foto-9-biru { top: 0; left: 0; width: 35% !important; z-index: 30; transform-origin: top left; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
-        .foto-8-pink { top: 20% !important; left: -2%; width: 30% !important; z-index: 20; transform-origin: left center; animation: masukKiri 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
-        .foto-7-hijau { bottom: 12% !important; left: -5px !important; width: 28% !important; z-index: 25; transform-origin: bottom left; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
-        
-        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75% !important; z-index: 55; animation: masukBawahCenter 1s ease-out forwards; }
-
-        .foto-5-biru { bottom: 0; left: 0; width: 40% !important; z-index: 50; transform-origin: bottom left; animation: masukBawah 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1.5s; }
-        .foto-10-pink-red { 
-            bottom: 5px; left: 50%; transform: translateX(-50%); width: 85% !important; z-index: 45; 
-            animation: masukBawahCenter 1s ease-out forwards, goyangSway 5s ease-in-out infinite 1s; 
-        }
-
+        /* Elemen Dekorasi Section 1 */
+        .foto-14-rumah { bottom: 2%; left: 50%; transform: translateX(-50%); width: 80%; z-index: 5; opacity: 0; animation: masukBawahRumah 1.5s ease-out forwards; }
+        .foto-13-burung { top: 8%; left: -350px; width: 300px; z-index: 15; animation: burungNyeberang 12s linear infinite 1s; }
+        .foto-1-biru { top: 0; right: 0; width: 35%; z-index: 30; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-9-biru { top: 0; left: 0; width: 35%; z-index: 30; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-2-pink { top: 20%; right: -2%; width: 30%; z-index: 20; animation: masukKanan 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-8-pink { top: 20%; left: -2%; width: 30%; z-index: 20; animation: masukKiri 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-3-hijau { bottom: 12%; right: -5px; width: 28%; z-index: 25; animation: masukKanan 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-7-hijau { bottom: 12%; left: -5px; width: 28%; z-index: 25; animation: masukKiri 1s ease-out forwards, gerakDaun 4s ease-in-out infinite 1s; }
+        .foto-4-biru { bottom: 0; right: 0; width: 40%; z-index: 50; animation: masukKanan 1s ease-out forwards, gerakDaun 6s ease-in-out infinite 1s; }
+        .foto-5-biru { bottom: 0; left: 0; width: 40%; z-index: 50; animation: masukBawah 1s ease-out forwards, gerakDaun 5s ease-in-out infinite 1s; }
+        .foto-6-biru { bottom: -5px; left: 50%; transform: translateX(-50%); width: 75%; z-index: 55; animation: masukBawahCenter 1s ease-out forwards; }
+        .foto-10-pink-red { bottom: 5px; left: 50%; transform: translateX(-50%); width: 85%; z-index: 45; animation: masukBawahCenter 1s ease-out forwards, goyangSway 5s ease-in-out infinite 1s; }
         .foto-12-bingkai { top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; object-position: top; z-index: 10; }
         
-        .main-content {
-            position: absolute;
-            top: 48%; left: 50%;
-            transform: translate(-50%, -50%);
+        .main-content { position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; z-index: 100; }
+        .foto-11-logo { width: 180px; margin-bottom: 25px; animation: popUpTimbul 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards 0.5s; }
+        .btn-buka {
+            background-color: #96693d; color: white; padding: 14px 40px; border-radius: 30px;
+            text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 2px;
+            text-transform: uppercase; white-space: nowrap; display: inline-block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; cursor: pointer; border: none;
+            animation: masukBawah 1s ease-out forwards 1.5s;
+        }
+
+        /* --- SECTION 2: HERO & AYAT --- */
+        #section-2 {
+            display: none; /* Sembunyi sampai tombol diklik */
+        }
+
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('foto_berdua.png') no-repeat center center;
+            background-size: cover;
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 100;
+            justify-content: flex-start;
+            padding-top: 15vh;
+            color: #4A4A4A;
+            text-align: center;
         }
 
-        .foto-11-logo { 
-            width: 180px; margin-bottom: 25px; 
-            animation: popUpTimbul 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards 0.5s; 
+        .hero-text {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(2px);
+            padding: 20px;
+            border-radius: 15px;
         }
 
-        .btn-buka {
-            background-color: #96693d;
-            color: white;
-            padding: 14px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            white-space: nowrap;
-            display: inline-block;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            opacity: 0;
-            animation: masukBawah 1s ease-out forwards 1.5s; 
+        .hero-section h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; margin-bottom: 10px; }
+        .hero-section h1 { font-family: 'Playfair Display', serif; font-weight: bold; font-size: 2.5rem; margin-bottom: 5px; }
+        .hero-section p.date { letter-spacing: 3px; font-size: 1.1rem; }
+
+        .swipe-up {
+            position: absolute; bottom: 30px; display: flex; flex-direction: column;
+            align-items: center; font-size: 0.8rem; opacity: 0.8; animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+
+        .ayat-section { padding: 80px 30px; text-align: center; background-color: #FFF3DD; position: relative; overflow: hidden; }
+        .text-arab { font-size: 1.5rem; line-height: 2.5rem; margin-bottom: 25px; color: #96693d; font-weight: bold; }
+        .text-indo { font-size: 0.95rem; font-style: italic; line-height: 1.6rem; color: #555; margin-bottom: 20px; }
+        .ayat-source { font-weight: bold; color: #96693d; letter-spacing: 1px; }
+
+        .music-disc {
+            position: absolute; right: -20px; bottom: 50px; width: 80px;
+            opacity: 0.6; animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        @media (max-width: 480px) {
+            .hero-section h1 { font-size: 2rem; }
+            .text-arab { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="master-container">
-        <img src="foto_12.png" class="dekor foto-12-bingkai">
-        <img src="foto_14.png" class="dekor foto-14-rumah">
-        <img src="foto_13.gif" class="dekor foto-13-burung">
+    <div id="section-1">
+        <div class="master-container">
+            <img src="foto_12.png" class="dekor foto-12-bingkai">
+            <img src="foto_14.png" class="dekor foto-14-rumah">
+            <img src="foto_13.gif" class="dekor foto-13-burung">
+            <img src="foto_1.png" class="dekor foto-1-biru">
+            <img src="foto_9.png" class="dekor foto-9-biru">
+            <img src="foto_2.png" class="dekor foto-2-pink">
+            <img src="foto_8.png" class="dekor foto-8-pink">
+            <img src="foto_3.png" class="dekor foto-3-hijau">
+            <img src="foto_7.png" class="dekor foto-7-hijau">
+            <img src="foto_10.png" class="dekor foto-10-pink-red">
+            <img src="foto_4.png" class="dekor foto-4-biru">
+            <img src="foto_5.png" class="dekor foto-5-biru">
+            <img src="foto_6.png" class="dekor foto-6-biru">
 
-        <img src="foto_1.png" class="dekor foto-1-biru">
-        <img src="foto_9.png" class="dekor foto-9-biru">
-        <img src="foto_2.png" class="dekor foto-2-pink">
-        <img src="foto_8.png" class="dekor foto-8-pink">
-
-        <img src="foto_3.png" class="dekor foto-3-hijau">
-        <img src="foto_7.png" class="dekor foto-7-hijau">
-
-        <img src="foto_10.png" class="dekor foto-10-pink-red">
-        <img src="foto_4.png" class="dekor foto-4-biru">
-        <img src="foto_5.png" class="dekor foto-5-biru">
-        <img src="foto_6.png" class="dekor foto-6-biru">
-
-        <div class="main-content">
-            <img src="foto_11.png" class="foto-11-logo">
-            <a href="#" class="btn-buka">BUKA UNDANGAN</a>
+            <div class="main-content">
+                <img src="foto_11.png" class="foto-11-logo">
+                <button onclick="bukaUndangan()" class="btn-buka">BUKA UNDANGAN</button>
+            </div>
         </div>
     </div>
 
+    <div id="section-2">
+        <section class="hero-section">
+            <div class="hero-text" data-aos="fade-down" data-aos-duration="1500">
+                <h3>The Wedding of</h3>
+                <h1>Aliandra & Adinda</h1>
+                <p class="date">26.09.2027</p>
+            </div>
+            <div class="swipe-up">
+                <span>Swipe Up</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+            </div>
+        </section>
+
+        <section class="ayat-section">
+            <img src="music_disc.png" class="music-disc" alt="Music Disc">
+            <div class="container" data-aos="fade-up" data-aos-duration="1500">
+                <p class="text-arab">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَهُمْ مَوَدَّةً وَرَحْمَةً</p>
+                <p class="text-indo">
+                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir."
+                </p>
+                <p class="ayat-source">QS. AR-RUM: 21</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // AOS Init
+        AOS.init({ once: true });
+
+        // Fix Mobile Height
         function setHeight() {
             let vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         }
         window.addEventListener('resize', setHeight);
         setHeight();
+
+        // Fungsi Buka Undangan
+        function bukaUndangan() {
+            const s1 = document.getElementById('section-1');
+            const s2 = document.getElementById('section-2');
+
+            s1.style.opacity = "0";
+            s1.style.visibility = "hidden";
+            
+            setTimeout(() => {
+                s1.style.display = "none";
+                s2.style.display = "block";
+                window.scrollTo(0, 0);
+                AOS.refresh();
+            }, 800);
+        }
     </script>
 </body>
 </html>
